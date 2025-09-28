@@ -11,6 +11,8 @@ public class Markdown {
     @TableId(type = IdType.AUTO)
     private Long id;
 
+    private String name;
+
     private String content;
 
     /** 是否加密存储 */

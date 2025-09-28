@@ -1,5 +1,6 @@
 package com.pine.pineapple.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.pine.pineapple.common.utils.Result;
 import com.pine.pineapple.entity.Markdown;
 import com.pine.pineapple.service.MarkdownService;
@@ -26,9 +27,11 @@ public class MarkdownController {
     }
 
     /** 按 id 获取 Markdown */
-    @GetMapping("/load/{id}")
-    public Result<?> load(@PathVariable Long id) {
-        Markdown md = markdownService.getById(id);
+    @GetMapping("/load/{name}")
+    public Result<?> load(@PathVariable String name) {
+        QueryWrapper<Markdown> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("name", name);
+        Markdown md = markdownService.getOne(queryWrapper);
         if (md == null) {
             return Result.fail("文档不存在");
         }
