@@ -14,8 +14,7 @@ public class GlobalCorsConfig {
         config.addAllowedOriginPattern("*"); // 允许所有来源
         config.addAllowedHeader("*");        // 允许所有请求头
         config.addAllowedMethod("*");        // 允许所有方法
-        config.setAllowCredentials(true);    // 是否允许携带 cookie
-
+        config.setAllowCredentials(false);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);

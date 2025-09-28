@@ -1,37 +1,18 @@
 package com.pine.pineapple.common.utils;
 
+import lombok.Data;
+
+@Data
 public class Result<T> {
-    private boolean success;
+    private Integer success;
     private String message;
     private T data;
 
-    public boolean isSuccess() {
-        return success;
-    }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
 
     public static <T> Result<T> ok(T data) {
         Result<T> r = new Result<>();
-        r.success = true;
+        r.success = 200;
         r.data = data;
         r.message = "ok";
         return r;
@@ -45,7 +26,7 @@ public class Result<T> {
 
     public static <T> Result<T> fail(String message) {
         Result<T> r = new Result<>();
-        r.success = false;
+        r.success = 500;
         r.message = message;
         return r;
     }

@@ -17,7 +17,7 @@ public class ArticleController {
     @Resource
     ArticleService articleService;
 
-    @GetMapping
+    @GetMapping("/list")
     public Result<?> list(@RequestParam(defaultValue = "1") int page,
                           @RequestParam(defaultValue = "10") int size) {
         Page<Article> pg = articleService.pageArticles(page, size);
