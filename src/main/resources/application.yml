@@ -18,7 +18,6 @@ mybatis-plus:
       id-type: auto
       logic-delete-value: 1
       logic-not-delete-value: 0
-      field-strategy: not_empty
   mapper-locations: classpath:/mapper/**/*.xml
 
 jwt:
@@ -30,4 +29,4 @@ server:
 
 logging:
   level:
-    com.example: DEBUG
+    com.pine: info

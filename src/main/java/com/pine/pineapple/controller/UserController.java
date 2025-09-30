@@ -3,6 +3,7 @@ package com.pine.pineapple.controller;
 
 import com.pine.pineapple.common.utils.Result;
 import com.pine.pineapple.entity.User;
+import com.pine.pineapple.entity.VO.UserVO;
 import com.pine.pineapple.service.UserService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
@@ -32,8 +33,8 @@ public class UserController {
         try {
             String username = body.get("username");
             String password = body.get("password");
-            String token = userService.login(username, password);
-            return Result.ok("登录成功", Map.of("token", token));
+            UserVO userVO = userService.login(username, password);
+            return Result.ok("登录成功", userVO);
         } catch (Exception e) {
             return Result.fail(e.getMessage());
         }

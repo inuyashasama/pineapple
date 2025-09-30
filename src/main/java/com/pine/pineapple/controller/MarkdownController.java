@@ -1,6 +1,7 @@
 package com.pine.pineapple.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pine.pineapple.common.utils.Result;
 import com.pine.pineapple.entity.Markdown;
 import com.pine.pineapple.service.MarkdownService;
@@ -23,6 +24,7 @@ public class MarkdownController {
         // 简单：每次保存一条新纪录
         md.setId(null);
         markdownService.save(md);
+
         return Result.ok("保存成功，id=" + md.getId());
     }
 
@@ -36,6 +38,13 @@ public class MarkdownController {
             return Result.fail("文档不存在");
         }
         return Result.ok(md);
+    }
+
+    @GetMapping("/list")
+    public Result<?> list(@RequestParam(defaultValue = "1") int page,
+                          @RequestParam(defaultValue = "10") int size) {
+        Page<Markdown> pg = markdownService.pageArticles(page, size);
+        return Result.ok(pg);
     }
 }
 
