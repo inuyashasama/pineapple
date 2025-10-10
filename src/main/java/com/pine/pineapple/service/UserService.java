@@ -8,5 +8,6 @@ public interface UserService {
     User getById(Long id);
     void register(User user);
     UserVO login(String username, String password);
+    void resetPassword(Long id);
 }
 

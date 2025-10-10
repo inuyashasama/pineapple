@@ -57,5 +57,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         result.setToken(JwtUtil.generateToken(u.getId()));
         return result;
     }
+
+    @Override
+    public void resetPassword(Long userId){
+        if (null == userId){
+            throw new RuntimeException("用户ID不可为空");
+        }
+        User u = getById(userId);
+        if (null == u){
+            throw new RuntimeException("用户不存在");
+        }
+        u.setPassword(passwordEncoder.encode("123456"));
+        updateById(u);
+    }
 }
 
