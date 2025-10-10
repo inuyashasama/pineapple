@@ -8,6 +8,7 @@ import com.pine.pineapple.service.MarkdownService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @RequestMapping("/api/markdown")
 public class MarkdownController {
@@ -21,14 +22,22 @@ public class MarkdownController {
         if (md.getContent() == null || md.getContent().isEmpty()) {
             return Result.fail("内容不能为空");
         }
-        // 简单：每次保存一条新纪录
-        md.setId(null);
-        markdownService.save(md);
 
-        return Result.ok("保存成功，id=" + md.getId());
+        long id = markdownService.modifyArticle(md);
+        return Result.ok("保存成功，id=" + id);
     }
 
-    /** 按 id 获取 Markdown */
+    @PostMapping("/delete/{id}")
+    public Result<?> delete(@PathVariable Long id) {
+        if (null == id) {
+            return Result.fail("id不能为空");
+        }
+
+        markdownService.deleteArticle(id);
+        return Result.ok("文件删除成功");
+    }
+
+    /** 按 文件名称 获取 Markdown */
     @GetMapping("/load/{name}")
     public Result<?> load(@PathVariable String name) {
         QueryWrapper<Markdown> queryWrapper = new QueryWrapper<>();

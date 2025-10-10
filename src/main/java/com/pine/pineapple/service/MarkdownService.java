@@ -8,5 +8,6 @@ public interface MarkdownService extends IService<Markdown> {
 
     Page<Markdown> pageArticles(int page, int size);
     void deleteArticle(Long id);
+    long modifyArticle(Markdown md);
 }
 
