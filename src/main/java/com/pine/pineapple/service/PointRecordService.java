@@ -9,5 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2025-10-11 15:26:38
 */
 public interface PointRecordService extends IService<PointRecord> {
-
+    void addPoints(Long userId, Integer points, String reason, String orderId);
+    boolean usePoints(Long userId, Integer points, String orderId);
+    Integer getUserPoints(Long userId);
 }
