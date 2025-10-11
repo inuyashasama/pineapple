@@ -5,10 +5,25 @@ spring:
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+  # 关键：告诉 Redisson 去哪加载配置
+  redisson:
+    config: classpath:redisson.yml
+
+  # RocketMQ（可选）
+  rocketmq:
+    name-server: 127.0.0.1:9876
+    producer:
+      group: point-producer-group
+
   jackson:
     serialization:
       write-dates-as-timestamps: false
     date-format: yyyy-MM-dd HH:mm:ss
+  data:
+    redis:
+      timeout: 5s
+      host: 127.0.0.1
+      port: 6379
 
 mybatis-plus:
   configuration:
