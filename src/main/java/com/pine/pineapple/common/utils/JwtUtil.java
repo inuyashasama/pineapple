@@ -14,7 +14,7 @@ public class JwtUtil {
         return Jwts.builder()
                 .setSubject(String.valueOf(userId))
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 3600_000 * 24)) // 1天
+                .setExpiration(new Date(System.currentTimeMillis() + 3600_000 * 6)) // 1天
                 .signWith(SECRET_KEY) // ✅ SecretKey
                 .compact();
     }

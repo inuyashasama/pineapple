@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -54,7 +55,7 @@ public class PointRecordServiceImpl extends ServiceImpl<PointRecordMapper, Point
             userPointMapper.updateById(userPoint);
         }
 
-        // 2. 插入流水
+        // 2. 插入签到记录
         PointRecord record = new PointRecord();
         record.setUserId(userId);
         record.setOrderId(orderId);
@@ -141,6 +142,24 @@ public class PointRecordServiceImpl extends ServiceImpl<PointRecordMapper, Point
             bucket.set(0, Duration.ofMinutes(10));
             return 0;
         }
+    }
+
+    @Override
+    public boolean isSigned(Long userId) {
+        QueryWrapper<PointRecord> query = new QueryWrapper<>();
+        query.eq("user_id", userId);
+        query.eq("change_type", "EARNED");
+        query.eq("status", "SUCCESS");
+        query.eq("reason", "DAILY_SIGN_IN");
+        query.eq("created_at", new Date());
+        return pointRecordMapper.selectCount(query) > 0;
+    }
+
+    @Override
+    public List<PointRecord> getUserPointsHistory(Long userId) {
+        QueryWrapper<PointRecord> query = new QueryWrapper<>();
+        query.eq("user_id", userId);
+        return pointRecordMapper.selectList(query);
     }
 }
 

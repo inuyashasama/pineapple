@@ -6,6 +6,8 @@ import com.pine.pineapple.service.PointRecordService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/user-point")
 public class PointRecordController {
@@ -29,5 +31,17 @@ public class PointRecordController {
     public Result get(@PathVariable Long userId) {
         Integer points = pointService.getUserPoints(userId);
         return Result.ok(points);
+    }
+
+    @GetMapping("/getSignStatus/{userId}")
+    public Result getSignInStatus(@PathVariable Long userId) {
+        boolean signed = pointService.isSigned(userId);
+        return Result.ok(signed);
+    }
+
+    @GetMapping("/getUserPointsHistory/{userId}")
+    public Result getUserPointsHistory(@PathVariable Long userId) {
+        List<PointRecord> userPointsHistory = pointService.getUserPointsHistory(userId);
+        return Result.ok(userPointsHistory);
     }
 }
