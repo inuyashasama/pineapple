@@ -26,7 +26,7 @@ import java.security.SignatureException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
-    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+    protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getRequestURI();
         // 允许不鉴权的路径：登录 / 注册 / 静态资源 / swagger（如需）
         return path.startsWith("/user") || path.startsWith("/swagger") || path.startsWith("/v3/api-docs");
@@ -79,12 +79,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         response.setStatus(status.value());
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter writer = response.getWriter();
-        writer.write("{\"code\":" + status.value() +
-                ",\"msg\":\"" + message +
-                "\",\"data\":null}");
+
+        // 使用标准的成功/失败标识
+        boolean isSuccess = status.is2xxSuccessful();
+        writer.write("{\"success\":" + isSuccess +
+                ",\"data\":null" +
+                ",\"message\":\"" + message + "\"}");
         writer.flush();
         writer.close();
     }
+
 
 
 
