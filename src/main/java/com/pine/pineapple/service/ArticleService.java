@@ -1,5 +1,8 @@
 package com.pine.pineapple.service;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pine.pineapple.entity.Article;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -10,4 +13,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface ArticleService extends IService<Article> {
 
+    boolean createArticle(Article article);
+    Article getArticleById(Long id);
+    boolean updateArticle(Article article);
+    boolean deleteArticle(Long id);
+
+    IPage<Article> pageArticles(Page<Article> page);
 }
