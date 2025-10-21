@@ -44,14 +44,17 @@ public class PointRecordServiceImpl extends ServiceImpl<PointRecordMapper, Point
     public void addPoints(Long userId, Integer points, String reason, String orderId) {
         // 1. 更新用户总积分
         UserPoint userPoint = userPointMapper.selectById(userId);
+        int totalPoints;
         if (userPoint == null) {
+            totalPoints = points;
             userPoint = new UserPoint();
             userPoint.setId(userId);
             userPoint.setTotalPoints(points);
             userPoint.setUserId(userId);
             userPointMapper.insert(userPoint);
         } else {
-            userPoint.setTotalPoints(userPoint.getTotalPoints() + points);
+            totalPoints = userPoint.getTotalPoints() + points;
+            userPoint.setTotalPoints(totalPoints);
             userPointMapper.updateById(userPoint);
         }
 
@@ -63,6 +66,7 @@ public class PointRecordServiceImpl extends ServiceImpl<PointRecordMapper, Point
         record.setPoints(points);
         record.setReason(reason);
         record.setStatus("SUCCESS");
+
         record.setCreatedAt(new Date());
         pointRecordMapper.insert(record);
 
@@ -71,8 +75,7 @@ public class PointRecordServiceImpl extends ServiceImpl<PointRecordMapper, Point
         RBucket<Integer> bucket = redisson.getBucket(key);
         RFuture<Integer> future = bucket.getAsync();
         future.whenComplete((current, throwable) -> {
-            Integer newPoints = (current == null ? 0 : current) + points;
-            bucket.set(newPoints, Duration.ofHours(1));
+            bucket.set(totalPoints, Duration.ofHours(1));
         });
     }
 

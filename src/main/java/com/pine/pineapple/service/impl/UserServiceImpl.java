@@ -9,12 +9,14 @@ import com.pine.pineapple.entity.VO.UserVO;
 import com.pine.pineapple.mapper.UserMapper;
 import com.pine.pineapple.service.UserService;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
 @Service
+@Slf4j
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
 
@@ -59,7 +61,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public void resetPassword(Long userId){
+    public void resetPassword(Long userId,String password){
         if (null == userId){
             throw new RuntimeException("用户ID不可为空");
         }
@@ -67,7 +69,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (null == u){
             throw new RuntimeException("用户不存在");
         }
-        u.setPassword(passwordEncoder.encode("123456"));
+        if (null == password){
+            log.warn("用户ID:[{}] 密码未设置，使用默认密码123456", userId);
+            password = "123456";
+        }
+        u.setPassword(passwordEncoder.encode(password));
         updateById(u);
     }
 }

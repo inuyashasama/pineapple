@@ -48,5 +48,14 @@ public class UserController {
         u.setPassword(null);
         return Result.ok(u);
     }
+
+    @PostMapping("/modifyPassword")
+    public Result<?> modifyPassword(@RequestAttribute(value = "userId") Long userId, @RequestAttribute(value = "password") String password) {
+        userService.resetPassword(userId,password);
+        if (password == null){
+            return Result.fail("密码重置成功!");
+        }
+        return Result.ok("密码修改成功!");
+    }
 }
 
