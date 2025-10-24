@@ -28,9 +28,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getRequestURI();
-        // 允许不鉴权的路径：登录 / 注册 / 静态资源 / swagger（如需）
-        return path.startsWith("/user") || path.startsWith("/swagger") || path.startsWith("/v3/api-docs");
+        boolean shouldSkip = path.startsWith("/user") ||
+                path.startsWith("/swagger") ||
+                path.startsWith("/v3/api-docs") ||
+                path.startsWith("/api/upload") ||
+                path.startsWith("/uploads");
+
+        log.debug("Request URI: {}, Should skip JWT filter: {}", path, shouldSkip);
+        return shouldSkip;
     }
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,

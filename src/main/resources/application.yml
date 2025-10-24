@@ -1,6 +1,11 @@
 server:
   port: 9022
+  servlet:
+    context-path: /
 
 spring:
     profiles:
       active: dev
+
+upload:
+  path: /uploads/avatars/

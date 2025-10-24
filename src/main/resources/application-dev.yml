@@ -10,10 +10,10 @@ spring:
     config: classpath:redisson.yml
 
   # RocketMQ（可选）
-  rocketmq:
-    name-server: 127.0.0.1:9876
-    producer:
-      group: point-producer-group
+#  rocketmq:
+#    name-server: 127.0.0.1:9876
+#    producer:
+#      group: point-producer-group
 
   jackson:
     serialization:
@@ -35,13 +35,7 @@ mybatis-plus:
       logic-not-delete-value: 0
   mapper-locations: classpath:/mapper/**/*.xml
 
-jwt:
-  secret: yourSecretKey
-  expire: 86400 # token
-
-server:
-  port: 9022
-
 logging:
   level:
     com.pine: info
+    org.springframework.security: debug

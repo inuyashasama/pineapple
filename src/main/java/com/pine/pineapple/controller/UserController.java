@@ -21,8 +21,8 @@ public class UserController {
     @PostMapping("/register")
     public Result<?> register(@RequestBody User user) {
         try {
-            userService.register(user);
-            return Result.ok("注册成功", null);
+            UserVO userVO = userService.register(user);
+            return Result.ok("注册成功", userVO);
         } catch (Exception e) {
             return Result.fail(e.getMessage());
         }
@@ -50,12 +50,15 @@ public class UserController {
     }
 
     @PostMapping("/modifyPassword")
-    public Result<?> modifyPassword(@RequestAttribute(value = "userId") Long userId, @RequestAttribute(value = "password") String password) {
-        userService.resetPassword(userId,password);
-        if (password == null){
+    public Result<?> modifyPassword(@RequestAttribute(value = "userId") Long userId, @RequestAttribute(value = "oldPassword") String oldPassword, @RequestAttribute(value = "newPassword") String newPassword) {
+        userService.resetPassword(userId,oldPassword,newPassword);
+        if (newPassword == null){
             return Result.fail("密码重置成功!");
         }
         return Result.ok("密码修改成功!");
     }
+
+
+
 }
 
