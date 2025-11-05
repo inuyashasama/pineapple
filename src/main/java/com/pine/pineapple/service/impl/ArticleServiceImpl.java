@@ -20,7 +20,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
     // 增
     @Override
     public boolean createArticle(Article article) {
-        return this.save(article);
+        return this.saveOrUpdate(article);
     }
 
     // 查

@@ -1,6 +1,5 @@
 package com.pine.pineapple.service;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pine.pineapple.entity.Article;

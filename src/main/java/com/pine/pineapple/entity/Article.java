@@ -78,17 +78,15 @@ public class Article extends BaseEntity{
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", userId=").append(userId);
-        sb.append(", title=").append(title);
-        sb.append(", content=").append(content);
-        sb.append(", views=").append(views);
-        sb.append(", filetype=").append(filetype);
-        sb.append("]");
-        return sb.toString();
+        return getClass().getSimpleName() +
+                " [" +
+                "Hash = " + hashCode() +
+                ", id=" + id +
+                ", userId=" + userId +
+                ", title=" + title +
+                ", content=" + content +
+                ", views=" + views +
+                ", filetype=" + filetype +
+                "]";
     }
 }
