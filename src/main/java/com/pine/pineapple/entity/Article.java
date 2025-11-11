@@ -43,6 +43,11 @@ public class Article extends BaseEntity{
      */
     private String filetype;
 
+    /**
+     * 图片地址
+     */
+    private String imageUrl;
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -60,7 +65,8 @@ public class Article extends BaseEntity{
             && (this.getTitle() == null ? other.getTitle() == null : this.getTitle().equals(other.getTitle()))
             && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()))
             && (this.getViews() == null ? other.getViews() == null : this.getViews().equals(other.getViews()))
-            && (this.getFiletype() == null ? other.getFiletype() == null : this.getFiletype().equals(other.getFiletype()));
+            && (this.getFiletype() == null ? other.getFiletype() == null : this.getFiletype().equals(other.getFiletype()))
+            && (this.getImageUrl() == null ? other.getImageUrl() == null : this.getImageUrl().equals(other.getImageUrl()));
     }
 
     @Override
@@ -73,6 +79,7 @@ public class Article extends BaseEntity{
         result = prime * result + ((getContent() == null) ? 0 : getContent().hashCode());
         result = prime * result + ((getViews() == null) ? 0 : getViews().hashCode());
         result = prime * result + ((getFiletype() == null) ? 0 : getFiletype().hashCode());
+        result = prime * result + ((getImageUrl() == null) ? 0 : getImageUrl().hashCode());
         return result;
     }
 
@@ -87,6 +94,7 @@ public class Article extends BaseEntity{
                 ", content=" + content +
                 ", views=" + views +
                 ", filetype=" + filetype +
+                ", imageUrl=" + imageUrl +
                 "]";
     }
 }
