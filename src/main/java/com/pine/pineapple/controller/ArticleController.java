@@ -47,9 +47,10 @@ public class ArticleController {
     @GetMapping("/page")
     public Result<IPage<Article>> page(
             @RequestParam(defaultValue = "1") Integer page,
-            @RequestParam(defaultValue = "10") Integer size) {
+            @RequestParam(defaultValue = "10") Integer size,
+            @RequestParam("userId") Long userId) {
         Page<Article> pageInfo = new Page<>(page, size);
-        IPage<Article> result = articleService.pageArticles(pageInfo);
+        IPage<Article> result = articleService.pageArticles(pageInfo,userId);
         return Result.ok(result);
     }
 

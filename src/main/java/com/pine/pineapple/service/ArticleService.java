@@ -17,5 +17,5 @@ public interface ArticleService extends IService<Article> {
     boolean updateArticle(Article article);
     boolean deleteArticle(Long id);
 
-    IPage<Article> pageArticles(Page<Article> page);
+    IPage<Article> pageArticles(Page<Article> page,Long userId);
 }

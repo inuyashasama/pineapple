@@ -1,5 +1,6 @@
 package com.pine.pineapple.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -43,8 +44,10 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
 
     // 分页查询
     @Override
-    public IPage<Article> pageArticles(Page<Article> page) {
-        return this.page(page);
+    public IPage<Article> pageArticles(Page<Article> page,Long userId) {
+        QueryWrapper<Article> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id", userId);
+        return this.page(page,queryWrapper);
     }
 }
 
