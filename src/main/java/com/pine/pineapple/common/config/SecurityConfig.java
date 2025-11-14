@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/user/**", "/api/upload/**", "/api/swagger-ui/**", "/api/v3/api-docs/**","/uploads/**").permitAll()
+                        .requestMatchers("/api/user/**", "/api/upload/**", "/api/swagger-ui/**", "/api/v3/api-docs/**","/uploads/**", "/api/ai/chat/stream").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(httpBasic -> {});
