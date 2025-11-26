@@ -57,7 +57,7 @@ public class TreasureItem {
     /**
      * 
      */
-    private Object depreciationMethod;
+    private String depreciationMethod;
 
     /**
      * 

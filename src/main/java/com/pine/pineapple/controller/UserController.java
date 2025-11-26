@@ -19,7 +19,7 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/register")
-    public Result<?> register(@RequestBody User user) {
+    public Result<UserVO> register(@RequestBody User user) {
         try {
             UserVO userVO = userService.register(user);
             return Result.ok("注册成功", userVO);
@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public Result<?> login(@RequestBody Map<String, String> body) {
+    public Result<UserVO> login(@RequestBody Map<String, String> body) {
         try {
             String username = body.get("username");
             String password = body.get("password");
@@ -42,7 +42,7 @@ public class UserController {
 
 
     @GetMapping("/profile")
-    public Result<?> profile(@RequestAttribute(value = "userId", required = false) Long userId) {
+    public Result<User> profile(@RequestAttribute(value = "userId", required = false) Long userId) {
         if (userId == null) return Result.fail("未登录");
         User u = userService.getById(userId);
         u.setPassword(null);
@@ -50,7 +50,7 @@ public class UserController {
     }
 
     @PostMapping("/modifyPassword")
-    public Result<?> modifyPassword(@RequestAttribute(value = "userId") Long userId, @RequestAttribute(value = "oldPassword") String oldPassword, @RequestAttribute(value = "newPassword") String newPassword) {
+    public Result<String> modifyPassword(@RequestAttribute(value = "userId") Long userId, @RequestAttribute(value = "oldPassword") String oldPassword, @RequestAttribute(value = "newPassword") String newPassword) {
         userService.resetPassword(userId,oldPassword,newPassword);
         if (newPassword == null){
             return Result.ok("密码重置成功!");

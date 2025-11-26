@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class UploadActionController {
 
     @RequestMapping("/avatar")
-    public Result<?> uploadAvatar(MultipartFile file) {
+    public Result<String> uploadAvatar(MultipartFile file) {
         try {
             String uploadDir = "uploads/avatars";
             long maxSize = 5 * 1024 * 1024; // 5MB
