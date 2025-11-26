@@ -4,8 +4,6 @@ package com.pine.pineapple.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.pine.pineapple.common.utils.JwtUtil;
-import com.pine.pineapple.common.utils.Result;
-import com.pine.pineapple.common.utils.UploadUtil;
 import com.pine.pineapple.entity.User;
 import com.pine.pineapple.entity.VO.UserVO;
 import com.pine.pineapple.mapper.UserMapper;
@@ -14,9 +12,6 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
 import java.time.LocalDateTime;
 
 @Service

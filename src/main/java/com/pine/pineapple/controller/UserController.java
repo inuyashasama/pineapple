@@ -53,12 +53,10 @@ public class UserController {
     public Result<?> modifyPassword(@RequestAttribute(value = "userId") Long userId, @RequestAttribute(value = "oldPassword") String oldPassword, @RequestAttribute(value = "newPassword") String newPassword) {
         userService.resetPassword(userId,oldPassword,newPassword);
         if (newPassword == null){
-            return Result.fail("密码重置成功!");
+            return Result.ok("密码重置成功!");
         }
         return Result.ok("密码修改成功!");
     }
-
-
 
 }
 
