@@ -15,6 +15,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // 将 /uploads/** 映射到实际的上传目录
         registry.addResourceHandler("/uploads/**")
-                .addResourceLocations("file:./uploads/avatars/");
+                .addResourceLocations("file:./uploads/images/");
     }
 }

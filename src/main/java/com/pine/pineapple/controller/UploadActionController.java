@@ -10,12 +10,11 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/api/upload")
 public class UploadActionController {
 
-    @RequestMapping("/avatar")
+    @RequestMapping("/image")
     public Result<String> uploadAvatar(MultipartFile file) {
         try {
-            String uploadDir = "uploads/avatars";
             long maxSize = 5 * 1024 * 1024; // 5MB
-            String avatarUrl = UploadUtil.uploadImage(file, uploadDir, maxSize);
+            String avatarUrl = UploadUtil.uploadImage(file, maxSize);
             return Result.ok("上传成功", avatarUrl);
         } catch (Exception e) {
             return Result.fail("上传失败: " + e.getMessage());

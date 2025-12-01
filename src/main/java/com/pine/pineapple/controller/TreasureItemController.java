@@ -18,17 +18,26 @@ public class TreasureItemController {
     @Resource
     TreasureItemService treasureItemService;
 
+    /*
+    获取所有藏品
+     */
     @RequestMapping("/getAllTreasureItems")
     public Result<List<TreasureItem>> getAllTreasureItems() {
         return Result.ok(treasureItemService.getAllTreasureItems());
     }
 
+    /*
+    保存藏品
+     */
     @RequestMapping("/saveTreasureItem")
     public Result<String> saveTreasureItem(@RequestBody TreasureItem item) {
         treasureItemService.saveTreasureItem(item);
         return Result.ok("保存成功");
     }
 
+    /*
+    删除藏品
+     */
     @RequestMapping("/deleteTreasureItem/{id}")
     public Result<String> deleteTreasureItem(@PathVariable String id) {
         treasureItemService.deleteTreasureItem(id);

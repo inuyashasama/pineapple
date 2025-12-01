@@ -65,12 +65,12 @@ public class UploadUtil {
     /**
      * 上传图片文件（专用方法）
      * @param file 图片文件
-     * @param uploadDir 上传目录
      * @param maxSize 最大文件大小
      * @return 文件访问路径
      * @throws IOException IO异常
      */
-    public static String uploadImage(MultipartFile file, String uploadDir, long maxSize) throws IOException {
+    public static String uploadImage(MultipartFile file, long maxSize) throws IOException {
+        String uploadDir = "uploads/images";
         String[] imageTypes = {"image/jpeg", "image/png", "image/jpg", "image/gif"};
         return uploadFile(file, uploadDir, imageTypes, maxSize);
     }
